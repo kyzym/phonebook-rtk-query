@@ -28,12 +28,7 @@ export const Form = () => {
       });
     }
 
-    const newContact = {
-      name: nameValue,
-      phone: numberValue,
-    };
-
-    dispatch(addContact({ ...newContact }));
+    dispatch(addContact({ name: nameValue, phone: numberValue }));
 
     form.reset();
   };
