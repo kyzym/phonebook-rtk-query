@@ -3,12 +3,16 @@ import { MdClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 import { Contact, DelButton, Name, Number } from './ContactsListItem.styled';
-import { PropTypes } from 'prop-types';
 
-export const ContactsListItem = ({ filteredContacts }) => {
+import { useGetContactsQuery } from 'redux/contactsRtkSlice';
+
+export const ContactsListItem = () => {
   const dispatch = useDispatch();
 
-  return filteredContacts.map(({ name, phone, id }) => (
+  const { data: contacts } = useGetContactsQuery();
+  if (!contacts) return;
+
+  return contacts.map(({ name, phone, id }) => (
     <Contact key={id}>
       <BsPhone size={20} />
       <Name>{name}</Name>
@@ -19,14 +23,4 @@ export const ContactsListItem = ({ filteredContacts }) => {
       </DelButton>
     </Contact>
   ));
-};
-
-ContactsListItem.propTypes = {
-  filteredContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };

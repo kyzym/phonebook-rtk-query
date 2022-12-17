@@ -1,14 +1,16 @@
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
-
-import { selectContacts } from 'redux/selectors';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from 'redux/contactsRtkSlice';
 
 import { Button, FormTag, Input, Label } from './ContactForm.styled';
 
 export const Form = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  const { data: contacts } = useGetContactsQuery();
+
+  const [addContact] = useAddContactMutation();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -28,8 +30,8 @@ export const Form = () => {
       });
     }
 
-    dispatch(addContact({ name: nameValue, phone: numberValue }));
-
+    addContact({ name: nameValue, phone: numberValue });
+    toast.success('Superrr!!! Contact added');
     form.reset();
   };
 
