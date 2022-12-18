@@ -17,21 +17,19 @@ export const ContactsList = () => {
   );
 
   return (
-    !isLoading && (
-      <Box as="ul" width="430px">
-        {visibleContacts.map(contact => (
-          <Contact key={contact.id}>
-            <ContactsListItem contact={contact} />
-          </Contact>
-        ))}
+    <Box as="ul" width="430px">
+      {visibleContacts.map(contact => (
+        <Contact key={contact.id}>
+          <ContactsListItem contact={contact} />
+        </Contact>
+      ))}
 
-        {
-          <ContactsNotification
-            visibleContacts={visibleContacts.length}
-            savedContactsNumber={contacts.length}
-          />
-        }
-      </Box>
-    )
+      {!isLoading && (
+        <ContactsNotification
+          visibleContacts={visibleContacts.length}
+          savedContactsNumber={contacts.length}
+        />
+      )}
+    </Box>
   );
 };

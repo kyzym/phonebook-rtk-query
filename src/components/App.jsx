@@ -26,7 +26,7 @@ export const App = () => {
       </SubTitle>
       <Filter />
       <Loader />
-      {<ContactsList />}
+      <ContactsList />
 
       <Toaster position="top-center" reverseOrder={false} />
     </Box>
