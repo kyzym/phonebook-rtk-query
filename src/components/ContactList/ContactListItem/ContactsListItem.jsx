@@ -8,9 +8,10 @@ import { useDeleteContactMutation } from 'redux/contactsSlice';
 export const ContactsListItem = ({ contact: { name, phone, id } }) => {
   const [deleteContact, { isLoading, isSuccess }] = useDeleteContactMutation();
 
-  const handleDelete = () => {
-    deleteContact(id);
-    toast.success(`OK, we've removed your contact`);
+  const handleDelete = async () => {
+    await deleteContact(id).then(
+      toast.success(`OK, we've removed your contact`)
+    );
   };
 
   return (
