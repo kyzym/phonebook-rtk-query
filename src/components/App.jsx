@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { FcContacts, FcList } from 'react-icons/fc';
 
 import { ContactsList, Filter, Form, SubTitle, Title } from '.';
-import { Loader } from './ContactList/Loader/Loader';
+import { Loader } from './Loader/Loader';
 
 import { Box } from './utils/Box.styled';
 
