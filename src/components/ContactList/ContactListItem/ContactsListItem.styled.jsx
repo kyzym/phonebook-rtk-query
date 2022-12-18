@@ -27,6 +27,9 @@ export const DelButton = styled.button`
   &:active {
     background-color: #bdbdbd;
   }
+  &:disabled {
+    color: black;
+  }
 `;
 
 export const Name = styled.p`

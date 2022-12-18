@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   useAddContactMutation,
   useGetContactsQuery,
@@ -10,9 +10,9 @@ import { Button, FormTag, Input, Label } from './ContactForm.styled';
 export const Form = () => {
   const { data: contacts } = useGetContactsQuery();
 
-  const [addContact] = useAddContactMutation();
+  const [addContact, { isLoading }] = useAddContactMutation();
 
-  const handleSubmit = e => {
+  const handleAddContact = e => {
     e.preventDefault();
 
     const form = e.target;
@@ -32,11 +32,12 @@ export const Form = () => {
 
     addContact({ name: nameValue, phone: numberValue });
     toast.success('Superrr!!! Contact added');
+
     form.reset();
   };
 
   return (
-    <FormTag onSubmit={handleSubmit}>
+    <FormTag onSubmit={handleAddContact}>
       <Label>
         Name:
         <Input
@@ -60,7 +61,9 @@ export const Form = () => {
         />
       </Label>
 
-      <Button type="submit">add contact</Button>
+      <Button type="submit" disabled={isLoading}>
+        add contact
+      </Button>
     </FormTag>
   );
 };

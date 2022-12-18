@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { contactsRtkSliceAPI } from './contactsRtkSlice';
-// import { contactsReducer } from './contactsSlice';
 
-// import { filterReducer } from './filtersSlice';
+import { filterReducer } from './filtersSlice';
 
 export const store = configureStore({
-  reducer: { [contactsRtkSliceAPI.reducerPath]: contactsRtkSliceAPI.reducer },
+  reducer: {
+    [contactsRtkSliceAPI.reducerPath]: contactsRtkSliceAPI.reducer,
+    filter: filterReducer,
+  },
 
   tagTypes: ['Contact'],
 
@@ -14,10 +16,3 @@ export const store = configureStore({
     contactsRtkSliceAPI.middleware,
   ],
 });
-
-// export const store = configureStore({
-//   reducer: {
-//     contacts: contactsReducer,
-//     filter: filterReducer,
-//   },
-// });

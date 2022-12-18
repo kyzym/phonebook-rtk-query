@@ -18,6 +18,7 @@ export const Filter = () => {
         type="text"
         name="filter"
         placeholder="Enter name"
+        debounceTimeout={300}
         onChange={handleChange}
       ></FilterInput>
     </FilterLabel>

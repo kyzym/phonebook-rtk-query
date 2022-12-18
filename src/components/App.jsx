@@ -3,7 +3,7 @@ import { FcContacts, FcList } from 'react-icons/fc';
 
 import {
   ContactsList,
-  // ContactsNotification,
+  ContactsNotification,
   Filter,
   Form,
   SubTitle,
@@ -32,7 +32,7 @@ export const App = () => {
       </SubTitle>
       <Filter />
       <ContactsList />
-      {/* <ContactsNotification /> */}
+      <ContactsNotification />
       <Toaster position="top-center" reverseOrder={false} />
     </Box>
   );

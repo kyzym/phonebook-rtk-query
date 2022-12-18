@@ -19,16 +19,19 @@ export const contactsRtkSliceAPI = createApi({
       }),
       invalidatesTags: ['Contact'],
     }),
-    // addContact: builder.mutation({
-    //   query: ({ name, phone }) => ({
-    //     url: '/contacts',
-    //     method: 'POST',
-    //     body: { name, phone },
-    //   }),
-    //   invalidatesTags: ['Contact'],
-    // }),
+
+    deleteContact: builder.mutation({
+      query: contactId => ({
+        url: `/contacts/${contactId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contact'],
+    }),
   }),
 });
 
-export const { useGetContactsQuery, useAddContactMutation } =
-  contactsRtkSliceAPI;
+export const {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useDeleteContactMutation,
+} = contactsRtkSliceAPI;
