@@ -1,34 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {
-  handleFulfilledAdd,
-  handleFulfilledDelete,
-  handleFulfilledFetch,
-  handlePending,
-  handleRejected,
-} from './handlers';
-import { addContact, deleteContact, fetchContacts } from './operations';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: {
-    contactList: [],
-    isLoading: false,
-    error: null,
-  },
+export const contactsSliceAPI = createApi({
+  reducerPath: 'contacts',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://6391d4eeb750c8d178cebc75.mockapi.io',
+  }),
+  endpoints: builder => ({
+    getContacts: builder.query({
+      query: () => '/contacts',
+      providesTags: ['Contact'],
+    }),
 
-  extraReducers: {
-    [fetchContacts.pending]: handlePending,
-    [fetchContacts.fulfilled]: handleFulfilledFetch,
-    [fetchContacts.rejected]: handleRejected,
+    addContact: builder.mutation({
+      query: contacts => ({
+        url: '/contacts',
+        method: 'POST',
+        body: contacts,
+      }),
+      invalidatesTags: ['Contact'],
+    }),
 
-    [addContact.pending]: handlePending,
-    [addContact.fulfilled]: handleFulfilledAdd,
-    [addContact.rejected]: handleRejected,
-
-    [deleteContact.pending]: handlePending,
-    [deleteContact.fulfilled]: handleFulfilledDelete,
-    [deleteContact.rejected]: handleRejected,
-  },
+    deleteContact: builder.mutation({
+      query: contactId => ({
+        url: `/contacts/${contactId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contact'],
+    }),
+  }),
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useDeleteContactMutation,
+} = contactsSliceAPI;

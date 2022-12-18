@@ -1,24 +1,20 @@
-// import { useSelector } from 'react-redux';
-import { useGetContactsQuery } from 'redux/contactsRtkSlice';
-// import { selectContacts, selectVisibleContacts } from 'redux/selectors';
+import { Box } from 'components/utils/Box.styled';
 
-export const ContactsNotification = () => {
-  const { data } = useGetContactsQuery();
-  const savedContactsNumber = data.length;
-  console.log(savedContactsNumber);
-  const filteredContactsNumber = savedContactsNumber;
-
+export const ContactsNotification = ({
+  visibleContacts,
+  savedContactsNumber,
+}) => {
   return (
-    <div>
-      {savedContactsNumber !== filteredContactsNumber ? (
+    <Box textAlign="center">
+      {savedContactsNumber !== visibleContacts ? (
         <span>
-          Found contacts: <b>{filteredContactsNumber}</b>
+          Found contacts: <b>{visibleContacts}</b>
         </span>
       ) : (
         <span>
           Total number of contacts: <b>{savedContactsNumber}</b>
         </span>
       )}
-    </div>
+    </Box>
   );
 };

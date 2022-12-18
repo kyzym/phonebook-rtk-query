@@ -1,14 +1,8 @@
 import { Toaster } from 'react-hot-toast';
 import { FcContacts, FcList } from 'react-icons/fc';
 
-import {
-  ContactsList,
-  ContactsNotification,
-  Filter,
-  Form,
-  SubTitle,
-  Title,
-} from '.';
+import { ContactsList, Filter, Form, SubTitle, Title } from '.';
+import { Loader } from './ContactList/Loader/Loader';
 
 import { Box } from './utils/Box.styled';
 
@@ -31,8 +25,9 @@ export const App = () => {
         <FcList />
       </SubTitle>
       <Filter />
-      <ContactsList />
-      <ContactsNotification />
+      <Loader />
+      {<ContactsList />}
+
       <Toaster position="top-center" reverseOrder={false} />
     </Box>
   );

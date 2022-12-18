@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import {
   useAddContactMutation,
   useGetContactsQuery,
-} from 'redux/contactsRtkSlice';
+} from 'redux/contactsSlice';
 
 import { Button, FormTag, Input, Label } from './ContactForm.styled';
 
