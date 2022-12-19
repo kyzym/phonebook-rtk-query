@@ -8,18 +8,17 @@ import { useDeleteContactMutation } from 'redux/contactsSlice';
 export const ContactsListItem = ({ contact: { name, phone, id } }) => {
   const [deleteContact, { isLoading, isSuccess }] = useDeleteContactMutation();
 
-  const handleDelete = async () => {
-    await deleteContact(id).then(
-      toast.success(`OK, we've removed your contact`)
-    );
+  const handleDelete = () => {
+    deleteContact(id).then(toast.success(`OK, we've removed -  ${name} `));
   };
+  const checkIsDeleted = isLoading || isSuccess;
 
   return (
     <>
       <BsPhone size={20} />
       <Name>{name}</Name>
       <Number>{phone}</Number>
-      <DelButton onClick={handleDelete} disabled={isLoading || isSuccess}>
+      <DelButton onClick={handleDelete} disabled={checkIsDeleted}>
         <MdClose size={24} />
       </DelButton>
     </>
